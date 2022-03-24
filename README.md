@@ -19,7 +19,7 @@ Pokedex Api
 
 
 ## :house: About the project
- Fiz uma Pokedex consumindo a PokeApi, uma Api que tem todos os pokemons, utilizei React e seus Hooks (useState,useContext e useEffect).
+ Projeto em React consumindo API PokeAPI, utilizando hooks, useState, useEffect, context e LocalStorage. 
 <br>
 
 ## :computer: Technologies
