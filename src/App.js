@@ -4,12 +4,14 @@ import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import Pokedex from "./components/Pokedex";
 import { getPokemons, getPokemonData } from "./Api";
+import { FavoriteProvider } from "./contexts/favoritesContext";
 
 function App() {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const itensPerPage = 24;
 
@@ -35,18 +37,36 @@ function App() {
     fetchPokemons();
   }, [page]);
 
+  const updateFavoritesPokemons = (name) => {
+    const updatedFavorites = [...favorites];
+    const favoriteIndex = favorites.indexOf(name);
+    if (favoriteIndex >= 0) {
+      updatedFavorites.slice(favoriteIndex, 1);
+    } else {
+      updatedFavorites.push(name);
+    }
+    setFavorites(updatedFavorites);
+  };
+
   return (
-    <div>
-      <Navbar />
-      <Searchbar />
-      <Pokedex
-        pokemons={pokemons}
-        loading={loading}
-        page={page}
-        setPage={setPage}
-        totalPages={totalPages}
-      />
-    </div>
+    <FavoriteProvider
+      value={{
+        favoritePokemons: favorites,
+        updateFavoritesPokemons: updateFavoritesPokemons,
+      }}
+    >
+      <div>
+        <Navbar />
+        <Searchbar />
+        <Pokedex
+          pokemons={pokemons}
+          loading={loading}
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+        />
+      </div>
+    </FavoriteProvider>
   );
 }
 
