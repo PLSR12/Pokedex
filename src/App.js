@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPokemonData, getPokemons, searchPokemon } from "./Api";
+import { getPokemonData, getPokemons, searchPokemon } from "./services/Api";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Pokedex from "./components/Pokedex";
